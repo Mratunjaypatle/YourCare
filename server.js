@@ -101,3 +101,19 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`   Windows → CMD → ipconfig → IPv4 Address`)
   console.log(`   Mac     → Terminal → ipconfig getifaddr en0\n`)
 })
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow your Vercel frontend URL
+    const allowed = [
+      process.env.FRONTEND_URL,
+      'https://gympro.vercel.app',
+      /^http:\/\/localhost:\d+$/,
+    ]
+    if (!origin) return callback(null, true)
+    const ok = allowed.some(p =>
+      typeof p === 'string' ? p === origin : p?.test?.(origin)
+    )
+    callback(null, ok || true) // true = allow all in dev
+  },
+  credentials: true,
+}))

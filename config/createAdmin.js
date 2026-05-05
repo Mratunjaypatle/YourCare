@@ -12,12 +12,12 @@ const createAdmin = async () => {
     await Admin.create({
       name: 'Admin',
       email: 'admin@gym.com',
-      password: 'admin123', // Send plain text
+      password: 'admin123', // Send plain text 
     });
 
     console.log('✅ Admin saved successfully');
     process.exit(0);
-  } catch (error) {
+  } catch (error) { 
     console.error(error);
     process.exit(1);
   }
